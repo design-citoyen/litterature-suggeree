@@ -54,3 +54,28 @@ function custom_woocommerce_auto_complete_order( $order_id ) {
     $order = wc_get_order( $order_id );
     $order->update_status( 'completed' );
 }
+
+
+/**
+ * Register Block
+ */
+function register_acf_block_types() {
+
+  // register refferal links
+  acf_register_block_type(array(
+    'name' => 'refferal',
+    'title' => _('Refferal'),
+    'description' => _('Add refferal links for bookstores'),
+    'render_template' => 'template-parts/blocks/refferal/refferal.php',
+    'category' => 'formatting',
+    'icon' => 'admin-comments',
+    'keywords' => 'array('refferal','list')'
+  ));
+
+}
+
+// Check if function exist and hook into setup.
+
+if( function_exist('acf_register_block_type')){
+  add_action('acf/init', 'register_acf_block_types')
+}
